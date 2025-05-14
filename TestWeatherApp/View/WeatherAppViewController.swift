@@ -69,7 +69,6 @@ final class WeatherAppViewController: UICollectionViewController, UICollectionVi
         let weatherProvider = self.weatherProvider
         Task { [weak self] in
             let weatherAppInfoResult = try await weatherProvider.getWeather()
-            print("@@@@@@", weatherAppInfoResult)
             guard let self else { return }
             
             self.collectionView.refreshControl?.endRefreshing()
