@@ -12,19 +12,8 @@ import UIKit
 extension Double {
     /// Форматирование дробного числа. Отбрасываются нули и точка.
     func format(precision: Int) -> String {
-        let string = String(format: "%.\(precision)f", self)
-        if string.contains(".") {
-            var formatted = string.reversed().drop { char in
-                char == "0"
-            }
-            if formatted.first == "." {
-                formatted = formatted.dropFirst()
-            }
-            
-            return String(formatted.reversed())
-        } else {
-            return string
-        }
+        let string = self.formatted(.number.precision(.fractionLength(0...precision)))
+        return string.replacingOccurrences(of: ",", with: ".")
     }
 }
 /// Форматирование множественного числа существительных.
