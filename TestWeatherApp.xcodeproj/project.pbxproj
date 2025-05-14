@@ -14,6 +14,7 @@
 		3A0297C86459FD72805CBAA0 /* Pods-TestWeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestWeatherApp.release.xcconfig"; path = "Target Support Files/Pods-TestWeatherApp/Pods-TestWeatherApp.release.xcconfig"; sourceTree = "<group>"; };
 		4D1D5079D056CEF9C7997F58 /* Pods-TestWeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestWeatherApp.debug.xcconfig"; path = "Target Support Files/Pods-TestWeatherApp/Pods-TestWeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
 		74E51D0108C9D2C9D6551C26 /* Pods_TestWeatherApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestWeatherApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE8F118D2DD48EF100E7DDA2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CEDEFB092DD22C1000F760BB /* TestWeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestWeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -70,6 +71,7 @@
 		CEDEFB002DD22C1000F760BB = {
 			isa = PBXGroup;
 			children = (
+				CE8F118D2DD48EF100E7DDA2 /* README.md */,
 				CEDEFB0B2DD22C1000F760BB /* TestWeatherApp */,
 				CEDEFB0A2DD22C1000F760BB /* Products */,
 				C66FFAFA082893BE303278E7 /* Pods */,
