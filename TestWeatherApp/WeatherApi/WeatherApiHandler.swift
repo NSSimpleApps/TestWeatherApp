@@ -12,7 +12,7 @@ actor WeatherApiHandler: WeatherAppProviderProtocol {
     private let weatherApiProvider: WeatherAppDataProviderProtocol
     private let locationManager = WeatherAppLocationManager()
     
-    init(weatherApiProvider: WeatherAppDataProviderProtocol) {
+    init(weatherApiProvider: any WeatherAppDataProviderProtocol) {
         self.weatherApiProvider = weatherApiProvider
     }
     
@@ -53,7 +53,7 @@ actor WeatherApiHandler: WeatherAppProviderProtocol {
                 if let todayForecast = forecastday.first {
                     let minTemperature = todayForecast.minTemperature
                     let maxTemperature = todayForecast.maxTemperature
-                    minMaxTemperature = "min: \(self.formatted(temperature: minTemperature)), max: \(self.formatted(temperature: maxTemperature))"
+                    minMaxTemperature = "min: \(minTemperature.formattedTemperature), max: \(maxTemperature.formattedTemperature)"
                     
                     let nowHour = calendar.component(.hour, from: now)
                     
@@ -70,8 +70,8 @@ actor WeatherApiHandler: WeatherAppProviderProtocol {
                                 }
                                 components.scheme = "http"
                                 return WeatherAppDayHourModel(time: time,
-                                                              temperature: self.formatted(temperature: forecastDayHour.temperature),
-                                                              weatherIcon: components.url!)
+                                                              temperature: forecastDayHour.temperature.formattedTemperature,
+                                                              weatherIcon: components.url)
                             } else {
                                 return nil
                             }
@@ -87,8 +87,8 @@ actor WeatherApiHandler: WeatherAppProviderProtocol {
                                 let hour = calendar.component(.hour, from: hourDate)
                                 components.scheme = "http"
                                 return WeatherAppDayHourModel(time: String(format: "%02d", hour),
-                                                              temperature: self.formatted(temperature: forecastDayHour.temperature),
-                                                              weatherIcon: components.url!)
+                                                              temperature: forecastDayHour.temperature.formattedTemperature,
+                                                              weatherIcon: components.url)
                             } else {
                                 return nil
                             }
@@ -103,7 +103,7 @@ actor WeatherApiHandler: WeatherAppProviderProtocol {
                 }
                 
                 
-                let temperature = self.formatted(temperature: current.temperature)
+                let temperature = current.temperature.formattedTemperature
                 let weatherState = current.condition.text
                 let locationName = location.name + ", " + location.country
                 let momentModel =
@@ -134,9 +134,9 @@ actor WeatherApiHandler: WeatherAppProviderProtocol {
                                 title = shortWeekdaySymbols[weekdayIndex]
                             }
                             components.scheme = "http"
-                            return WeatherAppForecastDayModel(title: title, weatherIcon: components.url!,
-                                                              minTemperature: self.formatted(temperature: forecastDay.minTemperature),
-                                                              maxTemperature: self.formatted(temperature: forecastDay.maxTemperature))
+                            return WeatherAppForecastDayModel(title: title, weatherIcon: components.url,
+                                                              minTemperature: forecastDay.minTemperature.formattedTemperature,
+                                                              maxTemperature: forecastDay.maxTemperature.formattedTemperature)
                         } else {
                             return nil
                         }
@@ -153,10 +153,6 @@ actor WeatherApiHandler: WeatherAppProviderProtocol {
         case .failure(let error):
             return .failure(error)
         }
-    }
-    
-    private func formatted(temperature: Double) -> String {
-        return temperature.format(precision: 1) + "°"
     }
 }
 /// Модельные данные от api.weather.com.

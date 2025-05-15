@@ -13,17 +13,30 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = scene as? UIWindowScene else { return }
         
-        let weatherApiRequestBuilder = WeatherApiRequestBuilder(key: WEATHER_API_KEY)
-        let weatherApiProvider = WeatherApiProvider(requestBuilder: weatherApiRequestBuilder)
-        let weatherApiHandler = WeatherApiHandler(weatherApiProvider: weatherApiProvider)
+//        Проверка данных от api.weatherapi.com.
+//        let weatherApiRequestBuilder = WeatherApiRequestBuilder(key: WEATHER_API_KEY)
+//        let weatherAppNetworkProvider = WeatherAppNetworkProvider(requestBuilder: weatherApiRequestBuilder)
+//        let weatherApiHandler = WeatherApiHandler(weatherApiProvider: weatherAppNetworkProvider)
         
-//        Для проверки.
-//        let weatherAppTestProvider = WeatherAppTestProvider()
-//        let weatherApiHandler = WeatherApiHandler(weatherApiProvider: weatherAppTestProvider)
+//        Для проверки локальных данных от api.weatherapi.com.
+//        let weatherApiTestProvider = WeatherApiTestProvider()
+//        let weatherApiHandler = WeatherApiHandler(weatherApiProvider: weatherApiTestProvider)
+        
+        // Проверка данных от api.openweathermap.com.
+        let openWeatherMapRequestBuilder = OpenWeatherMapRequestBuilder(appid: OPEN_WEATHER_APPID)
+        let weatherAppNetworkProvider = WeatherAppNetworkProvider(requestBuilder: openWeatherMapRequestBuilder)
+        let openWeatherMapApiHandler = OpenWeatherMapApiHandler(weatherApiProvider: weatherAppNetworkProvider,
+                                                                screenScale: Int(windowScene.screen.scale))
+        
+//        Для проверки локальных данных от api.openweathermap.com.
+//        let openWeatherMapTestProvider = OpenWeatherMapTestProvider()
+//        let openWeatherMapApiHandler = OpenWeatherMapApiHandler(weatherApiProvider: openWeatherMapTestProvider)
+        
+        let weatherProvider: any WeatherAppProviderProtocol = openWeatherMapApiHandler
         
         let window = UIWindow(windowScene: windowScene)
         window.overrideUserInterfaceStyle = .light
-        window.rootViewController = UINavigationController(rootViewController: WeatherAppViewController(weatherProvider: weatherApiHandler))
+        window.rootViewController = UINavigationController(rootViewController: WeatherAppViewController(weatherProvider: weatherProvider))
         self.window = window
         window.makeKeyAndVisible()
     }

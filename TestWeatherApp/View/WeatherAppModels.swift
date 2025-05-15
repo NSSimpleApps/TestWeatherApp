@@ -43,7 +43,7 @@ struct WeatherAppDayModel {
 struct WeatherAppDayHourModel {
     let time: String
     let temperature: String
-    let weatherIcon: URL
+    let weatherIcon: URL?
 }
 /// Прогноз на несколько дней вперёд.
 struct WeatherAppForecastModel {
@@ -53,7 +53,7 @@ struct WeatherAppForecastModel {
 /// Прогноз на несколько дней вперёд по дням.
 struct WeatherAppForecastDayModel {
     let title: String
-    let weatherIcon: URL
+    let weatherIcon: URL?
     let minTemperature: String
     let maxTemperature: String
 }

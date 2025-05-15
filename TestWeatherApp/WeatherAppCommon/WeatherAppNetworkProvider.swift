@@ -1,19 +1,24 @@
 //
-//  WeatherApiProvider.swift
+//  WeatherAppNetworkProvider.swift
 //  TestWeatherApp
 //
-//  Created by user on 13.05.2025.
+//  Created by user on 15.05.2025.
 //
 
 import Foundation
 import Alamofire
 
-/// Скачивание данных с api.weather.com.
-actor WeatherApiProvider: WeatherAppDataProviderProtocol {
-    private let requestBuilder: WeatherApiRequestBuilder
+/// Протокол для построения запросов к серверу.
+protocol WeatherAppRequestBuilderProtocol: Sendable {
+    func weather(latitude: Double, longitude: Double, days: Int) throws(NSError) -> URLRequest
+}
+
+/// Скачивание данных с сети в зависимости от запросов.
+actor WeatherAppNetworkProvider: WeatherAppDataProviderProtocol {
+    private let requestBuilder: WeatherAppRequestBuilderProtocol
     private let session: Session
     
-    init(requestBuilder: WeatherApiRequestBuilder) {
+    init(requestBuilder: any WeatherAppRequestBuilderProtocol) {
         self.requestBuilder = requestBuilder
         self.session = Session(startRequestsImmediately: false)
     }

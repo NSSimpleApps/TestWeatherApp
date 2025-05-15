@@ -153,11 +153,12 @@ final class WeatherAppViewController: UICollectionViewController, UICollectionVi
             forecastDayCell.titleLabel.text = day.title
             
             forecastDayCell.weatherImageView.image = nil
-            self.imageDownloader.loadImageOn(cell: forecastDayCell, imageURL: day.weatherIcon,
-                                             completion: { forecastDayCell, image in
-                forecastDayCell.weatherImageView.image = image
-            })
-            
+            if let weatherIcon = day.weatherIcon {
+                self.imageDownloader.loadImageOn(cell: forecastDayCell, imageURL: weatherIcon,
+                                                 completion: { forecastDayCell, image in
+                    forecastDayCell.weatherImageView.image = image
+                })
+            }
             forecastDayCell.minTemperatureLabel.text = day.minTemperature
             forecastDayCell.maxTemperatureLabel.text = day.maxTemperature
             return forecastDayCell

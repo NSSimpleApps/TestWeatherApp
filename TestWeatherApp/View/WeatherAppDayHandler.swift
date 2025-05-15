@@ -28,10 +28,12 @@ final class WeatherAppDayHandler: NSObject, UICollectionViewDataSource, UICollec
         dayHourCell.topLabel.text = hour.time
         
         dayHourCell.weatherImageView.image = nil
-        self.imageDownloader.loadImageOn(cell: dayHourCell, imageURL: hour.weatherIcon,
-                                         completion: { dayHourCell, image in
-            dayHourCell.weatherImageView.image = image
-        })
+        if let weatherIcon = hour.weatherIcon {
+            self.imageDownloader.loadImageOn(cell: dayHourCell, imageURL: weatherIcon,
+                                             completion: { dayHourCell, image in
+                dayHourCell.weatherImageView.image = image
+            })
+        }
         dayHourCell.bottomLabel.text = hour.temperature
         return dayHourCell
     }

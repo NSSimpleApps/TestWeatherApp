@@ -15,6 +15,10 @@ extension Double {
         let string = self.formatted(.number.precision(.fractionLength(0...precision)))
         return string.replacingOccurrences(of: ",", with: ".")
     }
+    
+    var formattedTemperature: String {
+        return self.format(precision: 1) + "°"
+    }
 }
 /// Форматирование множественного числа существительных.
 enum WeatherNumberCases {
