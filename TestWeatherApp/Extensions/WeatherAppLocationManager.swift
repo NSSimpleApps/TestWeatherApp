@@ -38,10 +38,11 @@ final class WeatherAppLocationManager: NSObject {
     
     func requestWhenInUseAuthorization(completion: @escaping (WeatherAppCoordinates?) -> Void) -> AnyCancellable? {
         if self.locationManager.authorizationStatus == .notDetermined {
-            self.locationManager.requestWhenInUseAuthorization()
-            return self.locationPublisher.sink(receiveValue: { locationCoordinate2D in
+            let result = self.locationPublisher.sink(receiveValue: { locationCoordinate2D in
                 completion(.init(locationCoordinate2D: locationCoordinate2D))
             })
+            self.locationManager.requestWhenInUseAuthorization()
+            return result
         } else {
             let location = self.locationManager.location?.coordinate
             completion(.init(locationCoordinate2D: location))

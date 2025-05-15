@@ -128,7 +128,7 @@ actor WeatherApiHandler: WeatherAppProviderProtocol {
                             if calendar.isDate(now, inSameDayAs: dayDate) {
                                 title = "Today"
                             } else {
-                                title = shortWeekdaySymbols[calendar.component(.weekday, from: dayDate)]
+                                title = shortWeekdaySymbols[calendar.component(.weekday, from: dayDate) - 1]
                             }
                             components.scheme = "http"
                             return WeatherAppForecastDayModel(title: title, weatherIcon: components.url!,
