@@ -120,7 +120,9 @@ actor WeatherApiHandler: WeatherAppProviderProtocol {
                 if forecastday.isEmpty {
                     forecastModel = nil
                 } else {
-                    let shortWeekdaySymbols = calendar.shortWeekdaySymbols
+                    let shortWeekdaySymbols = calendar.standardizeWeekDaySymbols(symbols: { calendar in
+                        return calendar.shortWeekdaySymbols
+                    })
                     let days = forecastday.compactMap { forecastDay in
                         if let dayDate = weatherApiDateParser.date(from: forecastDay.date),
                            var components = URLComponents(string: forecastDay.icon) {
@@ -128,13 +130,7 @@ actor WeatherApiHandler: WeatherAppProviderProtocol {
                             if calendar.isDate(now, inSameDayAs: dayDate) {
                                 title = "Today"
                             } else {
-                                let weekdayValue = calendar.component(.weekday, from: dayDate)
-                                let weekdayIndex: Int
-                                if weekdayValue == 1 {
-                                    weekdayIndex = 6
-                                } else {
-                                    weekdayIndex = weekdayValue - 2
-                                }
+                                let weekdayIndex = calendar.weekDayIndex(date: dayDate)
                                 title = shortWeekdaySymbols[weekdayIndex]
                             }
                             components.scheme = "http"
