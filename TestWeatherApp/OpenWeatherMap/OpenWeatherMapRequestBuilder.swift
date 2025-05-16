@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-let OPEN_WEATHER_APPID = "63f90ae5889c24671a5dc80efa827738"
+let OPEN_WEATHERMAP_APPID = "63f90ae5889c24671a5dc80efa827738"
 
 /// Построение запросов к api.openweathermap.org.
 final class OpenWeatherMapRequestBuilder: WeatherAppRequestBuilderProtocol {

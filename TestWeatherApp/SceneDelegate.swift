@@ -23,7 +23,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        let weatherApiHandler = WeatherApiHandler(weatherApiProvider: weatherApiTestProvider)
         
         // Проверка данных от api.openweathermap.com.
-//        let openWeatherMapRequestBuilder = OpenWeatherMapRequestBuilder(appid: OPEN_WEATHER_APPID)
+//        let openWeatherMapRequestBuilder = OpenWeatherMapRequestBuilder(appid: OPEN_WEATHERMAP_APPID)
 //        let weatherAppNetworkProvider = WeatherAppNetworkProvider(requestBuilder: openWeatherMapRequestBuilder)
 //        let openWeatherMapApiHandler = OpenWeatherMapApiHandler(weatherApiProvider: weatherAppNetworkProvider,
 //                                                                screenScale: Int(windowScene.screen.scale))
