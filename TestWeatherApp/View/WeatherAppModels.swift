@@ -56,4 +56,6 @@ struct WeatherAppForecastDayModel {
     let weatherIcon: URL?
     let minTemperature: String
     let maxTemperature: String
+    let humidity: String
+    let windSpeed: String
 }

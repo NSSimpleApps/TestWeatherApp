@@ -173,6 +173,8 @@ final class WeatherAppForecastDayCell: UICollectionViewCell, WeatherAppImageURLP
     let weatherImageView = UIImageView()
     let minTemperatureLabel = UILabel()
     let maxTemperatureLabel = UILabel()
+    let windSpeedLabel = UILabel()
+    let humidityLabel = UILabel()
     let separator = UIView()
     
     var imageURL: URL?
@@ -190,10 +192,12 @@ final class WeatherAppForecastDayCell: UICollectionViewCell, WeatherAppImageURLP
         contentView.autoLayoutSubview(self.titleLabel)
         self.titleLabel.leftEqualsToLayoutMargin(of: contentView)
         self.titleLabel.centerYEquals(to: contentView)
+        self.titleLabel.widthEqualsTo(50)
         
         contentView.autoLayoutSubview(self.weatherImageView)
         self.weatherImageView.sizeEqualsTo(square: 24)
-        self.weatherImageView.centerEquals(to: contentView)
+        self.weatherImageView.centerYEquals(to: contentView)
+        self.weatherImageView.leftEqualsToBorder(of: self.titleLabel.rightAnchor, space: 8)
         
         self.maxTemperatureLabel.textAlignment = .right
         self.maxTemperatureLabel.textColor = textColor
@@ -206,8 +210,22 @@ final class WeatherAppForecastDayCell: UICollectionViewCell, WeatherAppImageURLP
         self.minTemperatureLabel.textColor = textColor
         contentView.autoLayoutSubview(self.minTemperatureLabel)
         self.minTemperatureLabel.centerYEquals(to: contentView)
-        self.minTemperatureLabel.rightEqualsToBorder(of: self.maxTemperatureLabel.leftAnchor, space: 16)
+        self.minTemperatureLabel.rightEqualsToBorder(of: self.maxTemperatureLabel.leftAnchor, space: 8)
         self.minTemperatureLabel.widthEqualsTo(50)
+        
+        self.windSpeedLabel.textAlignment = .center
+        self.windSpeedLabel.textColor = textColor
+        contentView.autoLayoutSubview(self.windSpeedLabel)
+        self.windSpeedLabel.centerYEquals(to: contentView)
+        self.windSpeedLabel.rightEqualsToBorder(of: self.minTemperatureLabel.leftAnchor, space: 8)
+        self.windSpeedLabel.widthEqualsTo(70)
+        
+        self.humidityLabel.textAlignment = .center
+        self.humidityLabel.textColor = textColor
+        contentView.autoLayoutSubview(self.humidityLabel)
+        self.humidityLabel.centerYEquals(to: contentView)
+        self.humidityLabel.rightEqualsToBorder(of: self.windSpeedLabel.leftAnchor, space: 8)
+        self.humidityLabel.widthEqualsTo(50)
         
         self.separator.backgroundColor = .white
         contentView.autoLayoutSubview(self.separator)

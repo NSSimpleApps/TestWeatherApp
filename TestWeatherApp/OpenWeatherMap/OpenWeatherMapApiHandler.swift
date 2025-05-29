@@ -107,7 +107,8 @@ actor OpenWeatherMapApiHandler: WeatherAppProviderProtocol {
                         let maxTemperature = array.map({ $0.maxTemperature }).max()!
                         return WeatherAppForecastDayModel(title: forecastDayInfo.weekDayTitle, weatherIcon: nil,
                                                           minTemperature: minTemperature.formattedTemperature,
-                                                          maxTemperature: maxTemperature.formattedTemperature)
+                                                          maxTemperature: maxTemperature.formattedTemperature,
+                                                          humidity: "?", windSpeed: "?")
                     } else {
                         return nil
                     }

@@ -136,7 +136,9 @@ actor WeatherApiHandler: WeatherAppProviderProtocol {
                             components.scheme = "http"
                             return WeatherAppForecastDayModel(title: title, weatherIcon: components.url,
                                                               minTemperature: forecastDay.minTemperature.formattedTemperature,
-                                                              maxTemperature: forecastDay.maxTemperature.formattedTemperature)
+                                                              maxTemperature: forecastDay.maxTemperature.formattedTemperature,
+                                                              humidity: forecastDay.humidity.format(precision: 1) + "%",
+                                                              windSpeed: forecastDay.windSpeed.format(precision: 1) + "km/h")
                         } else {
                             return nil
                         }
@@ -230,6 +232,8 @@ struct WeatherApiForecastDay: Decodable {
     let date: String
     let minTemperature: Double
     let maxTemperature: Double
+    let windSpeed: Double
+    let humidity: Double
     let icon: String
     let hours: [WeatherApiForecastDayHour]
     
@@ -239,6 +243,8 @@ struct WeatherApiForecastDay: Decodable {
         case condition
         case minTemperature = "mintemp_c"
         case maxTemperature = "maxtemp_c"
+        case windSpeed = "maxwind_kph"
+        case humidity = "avghumidity"
         case hours = "hour"
     }
     
@@ -249,6 +255,8 @@ struct WeatherApiForecastDay: Decodable {
         self.date = try container.decode(String.self, forKey: .date)
         self.minTemperature = try dayContainer.decode(Double.self, forKey: .minTemperature)
         self.maxTemperature = try dayContainer.decode(Double.self, forKey: .maxTemperature)
+        self.windSpeed = try dayContainer.decode(Double.self, forKey: .windSpeed)
+        self.humidity = try dayContainer.decode(Double.self, forKey: .humidity)
         self.icon = try dayContainer.decode(WeatherApiCondition.self, forKey: .condition).icon
         self.hours = try container.decode([WeatherApiForecastDayHour].self, forKey: .hours)
     }

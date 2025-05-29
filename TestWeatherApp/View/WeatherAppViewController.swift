@@ -161,6 +161,9 @@ final class WeatherAppViewController: UICollectionViewController, UICollectionVi
             }
             forecastDayCell.minTemperatureLabel.text = day.minTemperature
             forecastDayCell.maxTemperatureLabel.text = day.maxTemperature
+            forecastDayCell.windSpeedLabel.text = day.windSpeed
+            forecastDayCell.humidityLabel.text = day.humidity
+            
             return forecastDayCell
         }
     }
